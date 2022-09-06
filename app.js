@@ -20,6 +20,7 @@ app.get("/", (req, res) => {
 app.post("/shorten", (req, res) => {
   const newUrl = req.body;
   console.log("post request", newUrl);
+  res.redirect("/");
 });
 
 app.listen(PORT, () => {
