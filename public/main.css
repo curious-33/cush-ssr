@@ -1,0 +1,142 @@
+.container {
+  width: 100%;
+  height: 100vh;
+}
+
+.header {
+  width: 100%;
+  height: 12vh;
+  background-color: var(--primary);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* .header .appTitle{
+
+} */
+
+.main {
+  width: max-content;
+  margin: 0 auto;
+}
+
+.logo {
+  width: 25rem;
+  height: 25rem;
+}
+
+.logo img {
+  width: 100%;
+  height: 100%;
+}
+
+.btn {
+  outline: none;
+  border: none;
+  user-select: none;
+
+  width: 100%;
+  background: transparent;
+  margin: 7px 0;
+  border: 1px solid var(--primary);
+  border-radius: 10px;
+  padding: 10px 15px;
+  cursor: pointer;
+
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 120%;
+  font-family: var(--font-family);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: 0.3s transform ease-in-out;
+  will-change: transform;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.btn::after {
+  background: (--primary);
+  border-radius: 3rem;
+  content: "";
+  display: block;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translate(-100%, 0) rotate(0deg);
+  transform-origin: top left;
+  transition: 0.3s transform ease-out;
+  will-change: transform;
+  z-index: -1;
+}
+
+.btn:hover > .btn::after {
+  transform: translate(0, 0);
+}
+
+.btn:hover {
+  transform: scale(0.95);
+}
+
+.prepend {
+  margin-right: 10px;
+}
+
+.append {
+  margin-left: 10px;
+}
+
+.inputContainer {
+  width: 100%;
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.input {
+  width: 100%;
+  padding: 10px 25px 10px 25px;
+  border: 1px solid var(--grey);
+  background: var(--white);
+  border-radius: 10px;
+  font-family: "Comic Neue", cursive, sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 120%;
+}
+
+.input:focus {
+  outline: none;
+  border: 1px solid var(--primary);
+  box-shadow: 0 0 7px #719ece;
+}
+
+.inputGroup {
+  width: 100%;
+  position: relative;
+}
+
+.prepend {
+  position: absolute;
+  left: 15px;
+  top: 12px;
+}
+
+.append {
+  position: absolute;
+  right: 20px;
+  top: 12px;
+}
+
+.error {
+  position: absolute;
+  color: var(--danger);
+  font-size: 16px;
+  transition: all 0.3s linear;
+}

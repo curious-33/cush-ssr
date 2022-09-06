@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="description" content="Curious URL Shortener" key="Home" />
+    <meta name="author" content="Curious" />
+    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+    <link rel="shortcut icon" href="#" />
+    <link rel="stylesheet" href="/global.css" />
+    <link rel="stylesheet" href="/main.css" />
+    <title>CUSH</title>
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <h1>
+          <a href="/" class="appTitle"> Curious URL Shortener </a>
+        </h1>
+      </header>
+      <main class="main">
+        <div class="logo">
+          <img src="/austronaout-1.png" alt="cush logo" class="logoImg" />
+        </div>
+        <div  class="content">
+          <form action="/shorten" method="post" class="fields">
+            <div class="inputContainer">
+              <div class="inputGroup">
+                <input
+                  class="input"
+                  type="text"
+                  name="url"
+                  placeholder="Enter URL to make cush"
+                />
+                <button type="submit" class="append submit-btn">Generate</button>
+              </div>
+              <div class="error"></div>
+            </div>
+          </div>
+          <div class="generatedUrl"></div>
+          <button type="submit" class="btn">
+            <!-- <div class="prepend">1</div> -->
+            <div class="title">Copy generated url</div>
+            <!-- <div class="append">2</div> -->
+          </button>
+        </>
+      </main>
+    </div>
+  </body>
+</html>
