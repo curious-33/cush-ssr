@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("./partials/head.ejs") %>
+
+  <body>
+    <div class="container">
+      <%- include("./partials/header.ejs") %>
+      <main class="main">
+        <div class="logo">
+          <img src="/austronaout-1.png" alt="cush logo" class="logoImg" />
+        </div>
+        <div class="content">
+          <form action="/" method="post" class="fields">
+            <div class="inputContainer">
+              <div class="inputGroup">
+                <input
+                  class="input"
+                  type="text"
+                  name="url"
+                  placeholder="Enter URL to make cush"
+                  minlength="3"
+                />
+                <button type="submit" class="append submit-btn">
+                  Generate
+                </button>
+              </div>
+              <div class="error"></div>
+            </div>
+          </form>
+          <% if(typeof generated_url === 'string') { %>
+          <a href="/redirect/<%= generated_url %>" class="btn">
+            <!-- <div class="prepend">1</div> -->
+            <div class="title"><%= generated_url %></div>
+            <!-- <div class="append">2</div> -->
+          </a>
+          <% } %>
+        </div>
+      </main>
+    </div>
+
+    <script></script>
+  </body>
+</html>
