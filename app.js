@@ -31,9 +31,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.set("view engine", "ejs");
 
-const logPath = path.join(__dirname, "logs", "request.log");
-const accessLogStream = fs.createWriteStream(logPath, { flags: "a" });
-app.use(morgan("combined", { stream: accessLogStream }));
+if (fs.existsSync("./logs")) {
+  const logPath = path.join(__dirname, "logs", "request.log");
+  const accessLogStream = fs.createWriteStream(logPath, { flags: "a" });
+  app.use(morgan("combined", { stream: accessLogStream }));
+} else {
+  fs.mkdirSync("logs", { recursive: true });
+}
 
 app.get("/", (req, res) => {
   res.render("index");
