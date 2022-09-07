@@ -9,7 +9,7 @@ const urlGenerator = require("./helpers/urlGenerator");
 const URLSchema = require("./models/url");
 
 const app = express();
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 
 urlGenerator("hello");
 
