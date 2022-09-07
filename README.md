@@ -1,6 +1,6 @@
 # cush-ssr
 
-<img src="image/README/1662550750887.png" width="900" height="600" />
+<img src="image/README/1662550750887.png" width="900" height="800" />
 
 ## Why CUSH?
 
