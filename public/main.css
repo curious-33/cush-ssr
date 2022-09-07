@@ -18,6 +18,8 @@
 }
 
 .main {
+  max-width: 500px;
+  min-width: 400px;
   width: 60%;
   margin: 0 auto;
 }
