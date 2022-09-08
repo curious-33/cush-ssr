@@ -5,6 +5,7 @@ const path = require("path");
 const mongoose = require("mongoose");
 const Console = require("./helpers/console");
 const urlShortenRoutes = require("./routes/shorten");
+const urlShortenApiRoutes = require("./routes/api");
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -35,7 +36,9 @@ if (fs.existsSync("./logs")) {
   fs.mkdirSync("logs", { recursive: true });
 }
 
+// console.log(require("luxon").DateTime.local())
 app.use(urlShortenRoutes);
+app.use("/api/v1/shorten", urlShortenApiRoutes);
 
 app.use((req, res) => {
   res.status(404).render("404");
