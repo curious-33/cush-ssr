@@ -68,7 +68,7 @@ app.post("/", (req, res) => {
   }
 });
 
-app.get("/redirect/:id", (req, res) => {
+app.get("/:id", (req, res) => {
   const id = req.params.id;
 
   URLSchema.findOne({ generated_url: id })

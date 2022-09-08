@@ -52,9 +52,9 @@
       const queryString = new URLSearchParams(window.location.search);
       const generated_url = queryString.get("generated_url");
       if (generated_url) {
-        const url = window.location.origin + "/redirect/" + generated_url;
+        const url = window.location.origin + "/" + generated_url;
         document.getElementById("result").style.display = "block";
-        urlLink.setAttribute("href", "/redirect/" + generated_url);
+        urlLink.setAttribute("href", "/" + generated_url);
         document.getElementById("shortUrl").textContent = url;
         copyBtn.addEventListener("click", (e) => {
           e.preventDefault();
