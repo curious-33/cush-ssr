@@ -1,101 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
-  <%- include("./partials/head.ejs") %>
+	<%- include("./partials/head.ejs") %>
 
-  <body>
-    <div class="container">
-      <%- include("./partials/header.ejs") %>
-      <main class="main">
-        <div class="logo">
-          <img src="austronaout-1.png" alt="cush logo" class="logoImg" />
-        </div>
-        <div class="content">
-          <form id="url-generator" class="fields">
-            <div class="inputContainer">
-              <div class="inputGroup">
-                <input
-                  id="url"
-                  class="input"
-                  type="text"
-                  name="url"
-                  placeholder="Enter URL to make a cush"
-                />
-                <button type="submit" class="append submit-btn">
-                  <img src="settings.svg" alt="settings-icon" />
-                </button>
-              </div>
-              <div id="url-error" class="error"></div>
-            </div>
-          </form>
-          <div id="result" class="result d-none">
-            <div class="result-short">
-              <h3 class="result-short__title">Generated short url</h3>
-              <div class="result-short__url">
-                <a id="url-link" class="url-link" target="_blank">
-                  <div id="shortUrl" class="shortUrl"></div>
-                </a>
-                <button type="button" id="copy-btn" class="btn">
-                  <img src="copy.svg" alt="copy-icon" />
-                </button>
-              </div>
+	<body>
+		<div class="container">
+			<%- include("./partials/header.ejs") %>
+			<main class="main">
+				<div class="logo">
+					<img src="austronaout-1.png" alt="cush logo" class="logoImg" />
+				</div>
+				<div class="content">
+					<form id="url-generator" class="fields">
+						<div class="inputContainer">
+							<div class="inputGroup">
+								<input
+									id="url"
+									class="input"
+									type="text"
+									name="url"
+									placeholder="Enter URL to make a cush"
+								/>
+								<button type="submit" class="append submit-btn">
+									<img src="settings.svg" alt="settings-icon" />
+								</button>
+							</div>
+							<div id="url-error" class="error"></div>
+						</div>
+					</form>
+					<div id="result" class="result d-none">
+						<div class="result-short">
+							<h3 class="result-short__title">Generated short url</h3>
+							<div class="result-short__url">
+								<a id="url-link" class="url-link" target="_blank">
+									<div id="shortUrl" class="shortUrl"></div>
+								</a>
+								<button type="button" id="copy-btn" class="btn">
+									<img src="copy.svg" alt="copy-icon" />
+								</button>
+							</div>
 
-              <p>P.S. You can copy the url or you can just click it</p>
-            </div>
-          </div>
-        </div>
-      </main>
-    </div>
+							<p>P.S. You can copy the url or you can just click it</p>
+						</div>
+					</div>
+				</div>
+			</main>
+		</div>
 
-    <script>
-      const urlLink = document.getElementById("url-link");
-      const copyBtn = document.getElementById("copy-btn");
-      const queryString = new URLSearchParams(window.location.search);
-      const generated_url = queryString.get("generated_url");
-      if (generated_url) {
-        const url = window.location.origin + "/" + generated_url;
-        document.getElementById("result").style.display = "block";
-        urlLink.setAttribute("href", "/" + generated_url);
-        document.getElementById("shortUrl").textContent = url;
-        copyBtn.addEventListener("click", (e) => {
-          e.preventDefault();
-          navigator.clipboard.writeText(url);
-        });
-      }
+		<script>
+			const urlLink = document.getElementById("url-link");
+			const copyBtn = document.getElementById("copy-btn");
+			const queryString = new URLSearchParams(window.location.search);
+			const generatedUrl = queryString.get("generated_url");
+			const originalUrl = queryString.get("url");
+			if (generatedUrl) {
+				const url = window.location.origin + "/" + generatedUrl;
+				document.getElementById("result").style.display = "block";
+				urlLink.setAttribute("href", "/" + generatedUrl);
+				document.getElementById("shortUrl").textContent = url;
+				document.getElementById("url").value = originalUrl;
+				copyBtn.addEventListener("click", (e) => {
+					e.preventDefault();
+					navigator.clipboard.writeText(url);
+				});
+			}
 
-      function validateField(id, errorId, minLength = 6) {
-        const el = document.getElementById(id);
-        const errorEl = document.getElementById(errorId);
-        if (el.value.trim().length < minLength) {
-          errorEl.textContent = `Must be at least ${minLength} characters`;
-          errorEl.style.visibility = "visible";
-          return false;
-        } else {
-          return true;
-        }
-      }
+			function validateField(id, errorId, minLength = 6) {
+				const el = document.getElementById(id);
+				const errorEl = document.getElementById(errorId);
+				if (el.value.trim().length < minLength) {
+					errorEl.textContent = `Must be at least ${minLength} characters`;
+					errorEl.style.visibility = "visible";
+					return false;
+				} else {
+					return true;
+				}
+			}
 
-      const urlGenerateForm = document.getElementById("url-generator");
-      const urlInput = document.getElementById("url");
-      urlGenerateForm.addEventListener("submit", (e) => {
-        e.preventDefault();
+			const urlGenerateForm = document.getElementById("url-generator");
+			const urlInput = document.getElementById("url");
+			urlGenerateForm.addEventListener("submit", (e) => {
+				e.preventDefault();
 
-        if (validateField("url", "url-error")) {
-          fetch("/", {
-            method: "post",
-            headers: {
-              Accept: "application/json",
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ url: urlInput.value }),
-          })
-            .then((result) => result.json())
-            .then(
-              (data) =>
-                (window.location.href = "/?generated_url=" + data.generated_url)
-            )
-            .catch((err) => console.error(err));
-        }
-      });
-    </script>
-  </body>
+				if (validateField("url", "url-error")) {
+					fetch("/", {
+						method: "post",
+						headers: {
+							Accept: "application/json",
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify({ url: urlInput.value }),
+					})
+						.then((result) => result.json())
+						.then(
+							(data) =>
+								(window.location.href = `?generated_url=${data.generated_url}&url=${data.url}`)
+						)
+						.catch((err) => console.error(err));
+				}
+			});
+		</script>
+	</body>
 </html>
